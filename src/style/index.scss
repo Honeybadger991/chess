@@ -1,0 +1,112 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App{
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.content{
+  width: 1140px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chessboard{
+  width: 800px;
+  height: 800px;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(8, 100px);
+  grid-template-rows: repeat(8, 100px);
+}
+.cell{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-black{
+    background-color: #0467e0;
+  }
+  &-white{
+    background-color: #B6C0CD;
+  }
+  &-highlight{
+    &:before{
+      content: '';
+      width: 24px;
+      height: 24px;
+      border-radius: 100%;
+      background-color: rgb(48, 50, 51);
+    }
+  }
+}
+.chess-piece{
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80px;
+  &:hover{
+    cursor: grab;
+  }
+  &-active{
+    cursor: grabbing;
+  }
+}
+
+.modal{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.3s all;
+  &-content{
+    width: 800px;
+    height: 300px;
+    position: absolute;
+    top: calc(50% - 150px);
+    left: calc(50% - 400px);
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: scale(0.5);
+    transition: 0.3s all;
+  }
+}
+
+.modal.active{
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content.active{
+  transform: scale(1);
+}
+
+.promote-piece{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  img{
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+    border-radius: 100%;
+    transition: 0.15s all ease;
+    &:hover{
+      background-color:#E2C681;
+      cursor: pointer;
+    }
+  }
+}
