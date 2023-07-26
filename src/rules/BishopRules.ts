@@ -1,4 +1,5 @@
-import { TeamType, Piece, Position } from "../Constants";
+import { TeamType } from "../Types";
+import { Piece, Position } from "../models";
 import { cellOccupied, cellOccupiedByOpponent, diagonalMoveAndAttack } from "./Rules";
 
 export const bishopMoveAndAttack = (initialPosition: Position, desiredPosition: Position, boardState: Piece[], team: TeamType) => {
@@ -13,7 +14,7 @@ export const getPossibleBishopMoves = (bishop: Piece, boardState: Piece[]) => {
 
     // Upper right movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: bishop.position.x + i, y: bishop.position.y + i});
+        const destination = new Position (bishop.position.x + i, bishop.position.y + i);
 
         if(!cellOccupied(destination, boardState)) {
             possibleMoves.push(destination);
@@ -27,7 +28,7 @@ export const getPossibleBishopMoves = (bishop: Piece, boardState: Piece[]) => {
 
     // Bottom right movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: bishop.position.x + i, y: bishop.position.y - i});
+        const destination = new Position (bishop.position.x + i, bishop.position.y - i);
 
         if(!cellOccupied(destination, boardState)) {
             possibleMoves.push(destination);
@@ -41,7 +42,7 @@ export const getPossibleBishopMoves = (bishop: Piece, boardState: Piece[]) => {
 
     // Bottom left movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: bishop.position.x - i, y: bishop.position.y - i});
+        const destination = new Position (bishop.position.x - i, bishop.position.y - i);
 
         if(!cellOccupied(destination, boardState)) {
             possibleMoves.push(destination);
@@ -55,7 +56,7 @@ export const getPossibleBishopMoves = (bishop: Piece, boardState: Piece[]) => {
 
     // Top left movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: bishop.position.x - i, y: bishop.position.y + i});
+        const destination = new Position (bishop.position.x - i, bishop.position.y + i);
 
         if(!cellOccupied(destination, boardState)) {
             possibleMoves.push(destination);

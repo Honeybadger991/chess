@@ -1,10 +1,10 @@
-import Chessboard from "./components/Chessboard";
+import Moves from "./components/Moves";
 
 function App() {
   return (
     <div className="App">
       <div className="content">
-        <Chessboard/>
+        <Moves/>
       </div>
     </div>
   );

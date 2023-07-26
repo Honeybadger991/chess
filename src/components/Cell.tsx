@@ -10,7 +10,8 @@ const Cell = ({number, img, highlight}: Props) => {
     const className: string = ['cell', 
     number % 2 === 0 && 'cell-black', 
     number % 2 !== 0 && 'cell-white', 
-    highlight && 'cell-highlight'].filter(Boolean).join(' ');
+    highlight && 'cell-highlight',
+    img && 'cell-chess-piece'].filter(Boolean).join(' ');
 
     return (
         <div className={className}>

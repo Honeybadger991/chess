@@ -1,4 +1,5 @@
-import { TeamType, Piece, Position } from "../Constants";
+import { TeamType } from "../Types";
+import { Piece, Position } from "../models";
 import { verticalMoveAndAttack, horizontalMoveAndAttack, diagonalMoveAndAttack, cellOccupied, cellOccupiedByOpponent } from "./Rules";
 
 export const queenMoveAndAttack = (initialPosition: Position, desiredPosition: Position, boardState: Piece[], team: TeamType) => {
@@ -19,7 +20,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Top movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x, y: queen.position.y + i});
+        const destination = new Position(queen.position.x, queen.position.y + i);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
@@ -33,7 +34,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Bottom movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x, y: queen.position.y - i});
+        const destination = new Position(queen.position.x,queen.position.y - i);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
@@ -47,7 +48,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Left movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x - i, y: queen.position.y});
+        const destination= new Position(queen.position.x - i,queen.position.y);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
@@ -61,7 +62,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Right movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x + i, y: queen.position.y});
+        const destination= new Position(queen.position.x + i,queen.position.y);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
@@ -75,7 +76,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Upper right movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x + i, y: queen.position.y + i});
+        const destination= new Position(queen.position.x + i,queen.position.y + i);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
@@ -89,7 +90,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Bottom right movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x + i, y: queen.position.y - i});
+        const destination= new Position(queen.position.x + i,queen.position.y - i);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
@@ -103,7 +104,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Bottom left movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x - i, y: queen.position.y - i});
+        const destination= new Position(queen.position.x - i,queen.position.y - i);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
@@ -117,7 +118,7 @@ export const getPossibleQueenMoves = (queen: Piece, boardstate: Piece[]) => {
 
     // Top left movement
     for(let i = 1; i < 8; i++) {
-        const destination: Position = ({x: queen.position.x - i, y: queen.position.y + i});
+        const destination= new Position(queen.position.x - i,queen.position.y + i);
 
         if(!cellOccupied(destination, boardstate)) {
             possibleMoves.push(destination);
