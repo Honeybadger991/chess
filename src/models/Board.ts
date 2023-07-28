@@ -12,6 +12,7 @@ export class Board{
     pieces: Piece[];
     totalTurns: number;
     winningTeam?: string;
+    graveyard?: Piece[];
 
     constructor(pieces: Piece[], totalTurns: number){
         this.pieces = pieces;
@@ -38,7 +39,7 @@ export class Board{
         this.checkCurrentTeamMoves();
 
         //render possible moves only for current team
-        this.pieces.filter(p => p.team !== this.currentTeam).forEach(p=> p.possibleMoves = [])
+        this.pieces.filter(p => p.team !== this.currentTeam).forEach(p=> p.possibleMoves = []);
 
         //check if there are possible moves, otherwise checkmate/stalemate
         if(this.pieces.filter(p => p.team === this.currentTeam).some(p => p.possibleMoves !== undefined && 
@@ -46,7 +47,7 @@ export class Board{
 
         //return all possible moves to define is it checkmate or stalemate
         this.pieces.forEach(p => {
-            p.possibleMoves = this.getValidMoves(p, this.pieces)
+            p.possibleMoves = this.getValidMoves(p, this.pieces);
         });
 
         const king = this.pieces.find(p => p.isKing && p.team === this.currentTeam);
@@ -142,17 +143,22 @@ export class Board{
                     p.position.x = destination.x;
                     p.position.y = destination.y;
                     p.hasMoved = true;
-                    results.push(p)
+                    results.push(p);
                 } else if (!p.samePosition(new Position(destination.x, destination.y - moveDirection))) {
                     if(p.isPawn){
                         (p as Pawn).enPassant = false;
                     }
-                    results.push(p)
+                    results.push(p);
                 }
                 return results;
             }, [] as Piece[]);
             this.calculateAllMoves();
         } else if(validMove){
+
+            // if(destinationPiece && destinationPiece.team === this.currentTeam){
+            //     this.graveyard.push(destinationPiece);
+            //     console.log(this.graveyard);
+            // }
 
             this.pieces = this.pieces.reduce((results, p) => {
                 //peace that we moving
@@ -165,13 +171,13 @@ export class Board{
                     p.position.x = destination.x;
                     p.position.y = destination.y;
                     p.hasMoved = true;
-                    results.push(p)
+                    results.push(p);
                 } else if (!p.samePosition(destination)) {
 
                     if(p.isPawn){
                         (p as Pawn).enPassant = false;
                     }
-                    results.push(p)
+                    results.push(p);
                 }
 
                 //piece at the destination location won't be pushed to results
@@ -186,7 +192,7 @@ export class Board{
     }
 
     clone(): Board{
-        const clonedPieces = this.pieces.map(p => p.clone())
-        return new Board(clonedPieces, this.totalTurns)
+        const clonedPieces = this.pieces.map(p => p.clone());
+        return new Board(clonedPieces, this.totalTurns);
     }
 }

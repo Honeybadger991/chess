@@ -6,41 +6,43 @@ export class Piece{
     position: Position;
     type: PieceType;
     team: TeamType;
+    value: number;
     hasMoved: boolean;
     possibleMoves?: Position[];
     
 
-    constructor(position: Position, type: PieceType, team: TeamType, hasMoved: boolean, possibleMoves: Position[] = []){
+    constructor(position: Position, type: PieceType, team: TeamType, value: number, hasMoved: boolean, possibleMoves: Position[] = []){
         this.img = `assets/${type}-${team}.png`;
         this.position = position;
         this.type = type;
         this.team = team;
+        this.value = value;
         this.hasMoved = hasMoved;
         this.possibleMoves = possibleMoves;
     }
 
     get isPawn(): boolean{
-        return this.type === PieceType.PAWN
+        return this.type === PieceType.PAWN;
     }
 
     get isRook(): boolean{
-        return this.type === PieceType.ROOK
+        return this.type === PieceType.ROOK;
     }
 
     get isKnight(): boolean{
-        return this.type === PieceType.KNIGHT
+        return this.type === PieceType.KNIGHT;
     }
 
     get isBishop(): boolean{
-        return this.type === PieceType.BISHOP
+        return this.type === PieceType.BISHOP;
     }
 
     get isQueen(): boolean{
-        return this.type === PieceType.QUEEN
+        return this.type === PieceType.QUEEN;
     }
 
     get isKing(): boolean{
-        return this.type === PieceType.KING
+        return this.type === PieceType.KING;
     }
 
     samePiecePosition(otherPiece: Piece): boolean{
@@ -52,6 +54,6 @@ export class Piece{
     }
 
     clone(){
-        return new Piece(this.position.clone(), this.type, this.team, this.hasMoved, this.possibleMoves?.map(m => m.clone()))
+        return new Piece(this.position.clone(), this.type, this.team, this.value, this.hasMoved, this.possibleMoves?.map(m => m.clone()))
     }
 }

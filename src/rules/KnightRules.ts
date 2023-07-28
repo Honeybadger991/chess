@@ -25,10 +25,10 @@ export const getPossibleKnightMoves = (knight: Piece, team: TeamType, boardState
             const horizontalMove = new Position (knight.position.x + i * 2, knight.position.y + j);
     
             if(cellIsEmptyOrOccupiedByOpponent(horizontalMove, boardState, team)){
-                possibleMoves.push(horizontalMove)
+                possibleMoves.push(horizontalMove);
             }
             if(cellIsEmptyOrOccupiedByOpponent(verticalMove, boardState, team)){
-                possibleMoves.push(verticalMove)
+                possibleMoves.push(verticalMove);
             }
         }
     }   

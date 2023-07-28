@@ -1,6 +1,6 @@
 import { MouseEvent, useRef, useState } from "react";
 import Cell from "./Cell";
-import { GRID_SIZE } from "../Constants";
+import { GRID_SIZE, BOARD_SIZE } from "../Constants";
 import { Piece, Position } from "../models";
 
 interface Props{
@@ -16,11 +16,11 @@ const Chessboard = ({playMove, pieces}: Props) => {
 
     const grabPiece = (e: MouseEvent) => {
         const element = e.target as HTMLElement;
-        const chessboard = chessboardRef.current
+        const chessboard = chessboardRef.current;
         if (element.classList.contains('chess-piece') && chessboard){
 
             const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / GRID_SIZE);
-            const grabY = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 800) / GRID_SIZE));
+            const grabY = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - BOARD_SIZE) / GRID_SIZE));
 
             setGrabPosition(new Position(grabX, grabY));
 
@@ -59,7 +59,7 @@ const Chessboard = ({playMove, pieces}: Props) => {
         if(activePiece && chessboard){
 
             const x = Math.floor((e.clientX - chessboard.offsetLeft) / GRID_SIZE);
-            const y = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 800) / GRID_SIZE)) ;
+            const y = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - BOARD_SIZE) / GRID_SIZE)) ;
 
             const currentPiece = pieces.find(p => p.samePosition(grabPosition));
             
@@ -80,7 +80,7 @@ const Chessboard = ({playMove, pieces}: Props) => {
     for (let i = 7; i >= 0; i--){
         for (let j = 0; j < 8; j++){
             const number = i+j+2;
-            const piece = pieces.find(p => p.samePosition(new Position(j, i)))
+            const piece = pieces.find(p => p.samePosition(new Position(j, i)));
             const img = piece ? piece.img : undefined;
             let currentPiece = activePiece !== null ? pieces.find(p => p.samePosition(grabPosition)) : undefined;
             let highlight = currentPiece?.possibleMoves ? 
@@ -101,4 +101,4 @@ const Chessboard = ({playMove, pieces}: Props) => {
     )
 }
 
-export default Chessboard
+export default Chessboard;
